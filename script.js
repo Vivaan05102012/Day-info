@@ -1,33 +1,20 @@
-function date() { 
-  const now = new Date();
-  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const day= daysOfWeek[now.getDay()];
-  const MonthsOfYear = ['January', 'February', 'March ', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November' , 'December'];
-  const year = now.getFullYear();
-  const month =  MonthsOfYear[now.getMonth()];
-  
-  
-  const date = now.getDate().toString().padStart(2, '0');
-  //display
-  const dateString = `${day}  ${date} ${month} ${year}`;
-  document.getElementById('date').textContent = dateString;
+function startTimer() {
+    const duration = 300;
+    let remainingTime = duration;
+  document.body.style.backgroundColor = 'darkcyan';
+
+    function updateTimer() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (remainingTime === 0) {
+            document.body.style.backgroundColor = 'red';
+        } else {
+            remainingTime--;
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    updateTimer();
 }
-date();
-
-
-function updateTime() {
-  const now = new Date();
-  console.log(now.toString())
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-
-  const timeString = `${hours}:${minutes}:${seconds}`;
-  document.getElementById('time').textContent = timeString;
-}
-
-// Update time every second
-setInterval(updateTime, 1000);
-
-// Initial call to display time immediately
-updateTime();
